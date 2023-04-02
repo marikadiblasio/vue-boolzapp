@@ -13,7 +13,117 @@
 <body>
     <div id="app">
         <div class="wrapper">
-            
+            <div class="screen mx-auto my-auto">
+                <div class="w-35 h-100">
+                    <div class="user-header container-fluid">
+                        <div class="row py-2 g-0 align-items-center">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center g-0">
+                                    <div class="img-card rounded-circle overflow-hidden">
+                                        <img class="img-fluid rounded-circle" src="./img/avatar_io.jpg" alt="Mine Avatar">
+                                    </div>
+                                    <div class="ps-2 flex-grow-1">
+                                        <h5 class="m-0 lh-1">Sofia</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 text-end">
+                                <a class="text-secondary px-2" href="#"><i class="fa-solid fa-circle-notch"></i></a>
+                                <a class="text-secondary px-2" href="#"><i class="fa-solid fa-message"></i></a>
+                                <a class="text-secondary px-2" href="#"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bell container-fluid">
+                        <div class="row py-2 g-0">
+                            <div class="col-10">
+                                <div class="d-flex align-items-center g-0">
+                                    <div class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-bell-slash"></i>
+                                    </div>
+                                    <div class="ps-2 d-flex align-items-center flex-wrap">
+                                        <h6 class="m-0 lh-1 col-12">Ricevi notifiche di nuovi messaggi</h6>
+                                        <span class="col-12 text-secondary small">Ultimo messaggio inviato</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group my-2 container-fluid search">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="Cerca o inizia una nuova chat">
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row h-100 overflow-y-auto">
+                            <div v-for="(contact, index) in contacts" :key="contact.id" class="col-12">
+                                <div class="card border-0 bg-transparent">
+                                    <div class="row py-2 g-0">
+                                        <div class="col-10">
+                                            <div class="d-flex g-0">
+                                                <div class="img-card rounded-circle overflow-hidden">
+                                                    <img class="img-fluid rounded-circle" :src="contact.avatar" :alt="contact.name">
+                                                </div>
+                                                <div class="ps-2 flex-grow-1">
+                                                    <h5 class="m-0 lh-1">{{contact.name}}</h5>
+                                                    <span class="text-secondary small">Ultimo messaggio inviato</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 text-end">cip</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-65 h-100">
+                    <div class="active-header">
+                        <div class="container-fluid align-items-center row py-2 g-0">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center g-0">
+                                    <div class="img-card rounded-circle overflow-hidden">
+                                        <img class="img-fluid rounded-circle" :src="contacts[0].avatar" :alt="contacts[0].name">
+                                    </div>
+                                    <div class="ps-2 flex-grow-1">
+                                        <h5 class="m-0 lh-1">{{contacts[0].name}}</h5>
+                                        <span class="text-secondary small">Ultimo accesso oggi alle ore {{contacts[0].messages[2].date}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 fs-3 text-end">
+                                <a class="text-secondary px-2" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                <a class="text-secondary px-2" href="#"><i class="fa-solid fa-paperclip"></i></a>
+                                <a class="text-secondary ps-2 pe-3" href="#"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="active-main">
+                        <div class="container-fluid h-100">
+                            <div class="row flex-column justify-content-center align-items-center gy-2  mt-2 mx-5">
+                                <div v-for="waMsg, index in contacts[0].messages" :class="waMsg.status" class="rounded mx-5 fit-ctn">
+                                    <div class="card-body pt-4">
+                                        {{waMsg.message}}
+                                    </div>
+                                    <div class="card-text small text-end text-body-secondary">{{waMsg.date}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-footer d-flex align-items-center">
+                        <div class="container-fluid">
+                            <div class="row justify-content-between fs-3 align-items-center w-100">
+                                <div class="col-1 text-secondary text-center"><i class="fa-regular fa-face-smile"></i></div>
+                                <div class="col-10">
+                                    <input type="text" name="user-msg" class="form-control fs-4" placeholder="Scrivi un messaggio">
+                                </div>
+                                <div class="col-1 text-secondary text-center"><i class="fa-solid fa-microphone"></i></div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

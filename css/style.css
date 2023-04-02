@@ -1,0 +1,87 @@
+/* General */
+:root{
+    --my-secundary: #eaeaea;
+    --my-bg-sent: #d5f9ba;
+    --my-white: #ffffff;
+}
+.wrapper{
+    background:  linear-gradient(180deg, #009688 17.19%, #D9DBD5 17.2%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.screen{
+    width: 90%;
+    height: 95%;
+    background-color: red;
+    display: flex;
+}
+.user-header, .active-header, .main-footer, .bell{
+    height: 80px;
+}
+.user-header, .active-header, .main-footer{
+    background-color: var(--my-secundary);
+}
+/* Left Side */
+.w-35{
+    width: 35%;
+    height: 100%;
+    background-color: #ffffff;
+}
+/* Barra di ricerca */
+.search {
+    height: 50px;
+}
+/* Lista contatti */
+.w-35 .container-fluid:last-child{
+    height: calc(100% - (80px + 80px + 70px));
+    overflow: hidden;
+}
+.img-card{
+    width: 4vw !important;
+    height: 4vw;
+    flex-shrink: 0;
+}
+/* Barra notifiche */
+.bell {
+    background-color: #8edafc;
+}
+.bell .rounded-circle{
+    width: 3vw !important;
+    height: 3vw;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    color: #8edafc;
+    font-size: 1.5rem;
+}
+/* Main side */
+.w-65{
+    width: 65%;
+    background-color: yellow;
+    height: 100%;
+}
+.active-main {
+    height: calc(100% - 160px);
+    background-image: url('../img/mine.jpg');
+    overflow-y: auto;
+}
+.rounded.sent{
+    background-color: var(--my-bg-sent);
+    align-self: flex-end;
+}
+.rounded.received{
+    background-color: var(--my-white);
+    align-self: flex-start;
+}
+.rounded.fit-ctn{
+    width: fit-content;
+}
+
+/* Hover & Active */
+.w-35 .col-12:hover{
+    background-color: var(--my-secundary);
+}
+.w-35 .col-12.active{
+    background-color: rgb(169, 163, 163);
+}
