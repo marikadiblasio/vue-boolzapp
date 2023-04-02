@@ -173,12 +173,16 @@ createApp(
                                     status: 'received'
                                 }
                             ],
-    }
-]
+                        }
+                ],
+                activeIndex: 0,
             }
         },
         methods : {
-
+        checkIndex(id){
+                this.activeIndex = this.contacts.findIndex((contact) => contact.id ===id);
+                console.log(this.activeIndex);
+            }
         },
         mounted(){
 

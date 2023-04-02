@@ -77,7 +77,6 @@
 .rounded.fit-ctn{
     width: fit-content;
 }
-
 /* Hover & Active */
 .w-35 .col-12:hover{
     background-color: var(--my-secundary);
