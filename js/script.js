@@ -246,7 +246,7 @@ createApp(
                 this.contacts[this.activeIndex].messages.push(this.autoMsg);
             },
             sendMsg(){
-                if (this.newTxt ===''){
+                if (this.newTxt.trim() ===''){
                     return
                 }
                 this.newMsg = {
