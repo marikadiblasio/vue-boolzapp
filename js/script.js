@@ -1,3 +1,4 @@
+const dt = luxon.DateTime
 const { createApp } = Vue;
 
 createApp(
@@ -176,13 +177,31 @@ createApp(
                         }
                 ],
                 activeIndex: 0,
+                newTxt: '',
+                newMsg: {
+                    date: '',
+                    message: '',
+                    status: 'sent'
+                }
             }
         },
         methods : {
-        checkIndex(id){
-                this.activeIndex = this.contacts.findIndex((contact) => contact.id ===id);
-                console.log(this.activeIndex);
+            checkIndex(id){
+                    this.activeIndex = this.contacts.findIndex((contact) => contact.id ===id);
+                    console.log(this.activeIndex);
+            },
+            sendMsg(){
+                console.log(this.newMsg);
+                this.newMsg = {
+                    date: dt.now().setLocale('it').toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS),
+                    message: this.newTxt,
+                    status: 'sent'
+                }
+                this.contacts[0].messages.push(this.newMsg);
+                console.dir(this.contacts[0].messages);
+                this.newTxt = '';
             }
+
         },
         mounted(){
 

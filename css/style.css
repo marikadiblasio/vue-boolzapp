@@ -43,6 +43,12 @@
     height: 4vw;
     flex-shrink: 0;
 }
+.w-35 .col-10 p{
+    width: calc(100% - 5vw);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+} 
 /* Barra notifiche */
 .bell {
     background-color: #8edafc;

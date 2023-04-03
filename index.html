@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Boolzapp</title>
 </head>
 <body>
@@ -19,7 +21,7 @@
                     <!-- UserHeader -->
                     <div class="user-header container-fluid">
                         <div class="row py-2 g-0 align-items-center">
-                            <div class="col-9">
+                            <div class="col-8">
                                 <div class="d-flex align-items-center g-0">
                                     <div class="img-card rounded-circle overflow-hidden">
                                         <img class="img-fluid rounded-circle" src="./img/avatar_io.jpg" alt="Mine Avatar">
@@ -29,7 +31,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 text-end">
+                            <div class="col-4 text-end">
                                 <a class="text-secondary px-2" href="#"><i class="fa-solid fa-circle-notch"></i></a>
                                 <a class="text-secondary px-2" href="#"><i class="fa-solid fa-message"></i></a>
                                 <a class="text-secondary px-2" href="#"><i class="fa-solid fa-ellipsis-vertical"></i></a>
@@ -70,7 +72,7 @@
                                                 </div>
                                                 <div class="ps-2 flex-grow-1">
                                                     <h5 class="m-0 lh-1">{{contact.name}}</h5>
-                                                    <span class="text-secondary small">{{contact.messages[contact.messages.length-1].message}}</span>
+                                                    <p class="text-secondary m-0 small">{{contact.messages[contact.messages.length-1].message}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +109,7 @@
                     <!-- Active messages -->
                     <div class="active-main">
                         <div class="container-fluid h-100">
-                            <div class="row flex-column justify-content-center align-items-center gy-2  mt-2 mx-5">
+                            <div class="row flex-column justify-content-center align-items-center gy-2  mt-2 gx-5">
                                 <div v-for="waMsg, index in contacts[activeIndex].messages" :class="waMsg.status" class="rounded mx-5 fit-ctn">
                                     <div class="card-body pt-4">
                                         {{waMsg.message}}
@@ -123,9 +125,10 @@
                             <div class="row justify-content-between fs-3 align-items-center w-100">
                                 <div class="col-1 text-secondary text-center"><i class="fa-regular fa-face-smile"></i></div>
                                 <div class="col-10">
-                                    <input type="text" name="user-msg" class="form-control fs-4" placeholder="Scrivi un messaggio">
+                                    <input @keyup.enter="sendMsg" v-model="newTxt" type="text" name="user-msg" class="form-control fs-4" placeholder="Scrivi un messaggio">
                                 </div>
-                                <div class="col-1 text-secondary text-center"><i class="fa-solid fa-microphone"></i></div>
+                                <div class="col-1 d-none text-secondary text-center"><i class="fa-solid fa-microphone"></i></div>
+                                <div class="col-1 text-secondary text-center"><i class="fa-regular fa-paper-plane"></i></div>
                             </div>
                         </div>
                     </div>
@@ -133,7 +136,6 @@
             </div>
         </div>
     </div>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script type="text/javascript" src="./js/script.js"></script>
 </body>
 </html>
