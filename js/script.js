@@ -1,4 +1,4 @@
-const dt = luxon.DateTime
+const dt = luxon.DateTime;
 const { createApp } = Vue;
 
 createApp(
@@ -192,12 +192,14 @@ createApp(
             },
             sendMsg(){
                 console.log(this.newMsg);
+                                                        //'20/03/2020 16:30:55'
                 this.newMsg = {
-                    date: dt.now().setLocale('it').toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS),
+                    date: dt.now().setLocale('it').toFormat('dd/LL/yyyy TT'),
                     message: this.newTxt,
                     status: 'sent'
                 }
                 this.contacts[0].messages.push(this.newMsg);
+                console.log(this.newMsg);
                 console.dir(this.contacts[0].messages);
                 this.newTxt = '';
             }
