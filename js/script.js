@@ -182,6 +182,11 @@ createApp(
                     date: '',
                     message: '',
                     status: 'sent'
+                },
+                autoMsg: {
+                    date: '',
+                    message: 'ok',
+                    status: 'received'
                 }
             }
         },
@@ -190,20 +195,23 @@ createApp(
                     this.activeIndex = this.contacts.findIndex((contact) => contact.id ===id);
                     console.log(this.activeIndex);
             },
+            autoRx(){
+                this.autoMsg.date = dt.now().setLocale('it').toFormat('dd/LL/yyyy TT');
+                this.contacts[this.activeIndex].messages.push(this.autoMsg);
+            },
             sendMsg(){
-                console.log(this.newMsg);
-                                                        //'20/03/2020 16:30:55'
                 this.newMsg = {
                     date: dt.now().setLocale('it').toFormat('dd/LL/yyyy TT'),
                     message: this.newTxt,
                     status: 'sent'
                 }
-                this.contacts[0].messages.push(this.newMsg);
+                this.contacts[this.activeIndex].messages.push(this.newMsg);
                 console.log(this.newMsg);
-                console.dir(this.contacts[0].messages);
+                console.dir(this.contacts[this.activeIndex].messages);
+                setTimeout(this.autoRx, 1000);
                 this.newTxt = '';
+                this.autoMsg.date = '';
             }
-
         },
         mounted(){
 

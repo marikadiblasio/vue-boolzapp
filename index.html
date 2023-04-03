@@ -127,8 +127,9 @@
                                 <div class="col-10">
                                     <input @keyup.enter="sendMsg" v-model="newTxt" type="text" name="user-msg" class="form-control fs-4" placeholder="Scrivi un messaggio">
                                 </div>
-                                <div class="col-1 d-none text-secondary text-center"><i class="fa-solid fa-microphone"></i></div>
-                                <div class="col-1 text-secondary text-center"><i class="fa-regular fa-paper-plane"></i></div>
+                                <!-- appare il microfono se il messaggio è vuoto, altrimenti il simbolo per invio -->
+                                <div :class="!newTxt ? '' : 'd-none'" class="col-1 text-secondary text-center"><i class="fa-solid fa-microphone"></i></div>
+                                <div @click="sendMsg" :class="!newTxt ? 'd-none' : ''" class="col-1 text-secondary text-center"><i class="fa-regular fa-paper-plane"></i></div>
                             </div>
                         </div>
                     </div>
