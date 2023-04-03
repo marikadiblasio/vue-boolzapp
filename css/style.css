@@ -36,7 +36,6 @@
 /* Lista contatti */
 .w-35 .container-fluid:last-child{
     height: calc(100% - (80px + 80px + 70px));
-    overflow: hidden;
 }
 .img-card{
     width: 4vw !important;
@@ -71,6 +70,7 @@
     height: calc(100% - 160px);
     background-image: url('../img/mine.jpg');
     overflow-y: auto;
+    overflow-x: hidden;
 }
 .rounded.sent{
     background-color: var(--my-bg-sent);
@@ -83,10 +83,24 @@
 .rounded.fit-ctn{
     width: fit-content;
 }
+/* Dropdown */
+.dropOpts{
+    position: absolute;
+    right: 0;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+}
+.active-main button.btn{
+    opacity: 0;
+}
 /* Hover & Active */
 .w-35 .col-12:hover{
     background-color: var(--my-secundary);
 }
 .w-35 .col-12.active{
     background-color: rgb(169, 163, 163);
+}
+.active-main button.btn:hover{
+    opacity: 1;;
 }

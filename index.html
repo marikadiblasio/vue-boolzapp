@@ -61,10 +61,10 @@
                     </div>
                     <!-- Lista contatti -->
                     <div class="container-fluid">
-                        <div class="row h-100 overflow-y-auto">
-                            <div @click="checkIndex(contact.id)" v-for="(contact, index) in contacts" :key="contact.id" :class="{'active' : activeIndex === index, 'd-none': !contact.visible}" class="col-12">
+                        <div class="row h-100 align-content-start overflow-x-hidden overflow-y-auto">
+                            <div @click="checkIndex(contact.id)" v-for="(contact, index) in contacts" :key="contact.id" :class="{'active' : activeIndex === index, 'd-none': !contact.visible}" class="col-12 py-2">
                                 <div class="card border-0 bg-transparent">
-                                    <div class="row py-2 g-0">
+                                    <div class="row py-2 m-0 g-0">
                                         <div class="col-10">
                                             <div class="d-flex g-0">
                                                 <div class="img-card rounded-circle overflow-hidden">
@@ -72,7 +72,7 @@
                                                 </div>
                                                 <div class="ps-2 flex-grow-1">
                                                     <h5 class="m-0 lh-1">{{contact.name}}</h5>
-                                                    <p class="text-secondary m-0 small">{{contact.messages[contact.messages.length-1].message}}</p>
+                                                    <p class="text-secondary m-0">{{contact.messages[contact.messages.length-1].message}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,12 +109,20 @@
                     <!-- Active messages -->
                     <div class="active-main">
                         <div class="container-fluid h-100">
-                            <div class="row flex-column justify-content-center align-items-center gy-2  mt-2 gx-5">
-                                <div v-for="waMsg, index in contacts[activeIndex].messages" :class="waMsg.status" class="rounded mx-5 fit-ctn">
-                                    <div class="card-body pt-4">
+                            <div class="row flex-column justify-content-center position-relative align-items-center gy-2  mt-2 gx-5">
+                                <div v-for="(waMsg, index) in contacts[activeIndex].messages" :key="index" :class="waMsg.status, {'d-none' : waMsg.removed === true}" class="rounded mx-5 fit-ctn position-relative">
+                                    <div :class="{'d-none' : waMsg.removed === true}" class="card-body pt-4">
                                         {{waMsg.message}}
+                                        <button @click="waMsg.drop = !waMsg.drop" class="btn"><i class="fa-solid fa-angle-down"></i></button>
                                     </div>
+                                    <!-- <div class="card-text small text-end text-body-secondary">{{waMsg.date}}</div> -->
                                     <div class="card-text small text-end text-body-secondary">{{waMsg.date.slice(11, 16)}}</div>
+                                    <div :class="{'d-none' : waMsg.drop === false}" class="dropOpts bg-white rounded position-absolute">
+                                        <ul class="list-unstyled">
+                                            <li class="btn" click="openInfo()">Info messaggio</li>
+                                            <li class="btn" @click="deleteMsg(index)">Cancella messaggio</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
