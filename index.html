@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="ps-2 d-flex align-items-center flex-wrap">
                                         <h6 class="m-0 lh-1 col-12">Ricevi notifiche di nuovi messaggi</h6>
-                                        <span class="col-12 text-secondary small">Ultimo messaggio inviato</span>
+                                        <a href="#" class="col-12 text-secondary small">Attiva notifiche desktop</a>
                                     </div>
                                 </div>
                             </div>
@@ -57,12 +57,12 @@
                     <!-- Search Bar -->
                     <div class="input-group my-2 container-fluid search">
                         <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" name="search" class="form-control" placeholder="Cerca o inizia una nuova chat">
+                        <input @keyup="searchContact" v-model="searchTxt" type="text" name="search" class="form-control" placeholder="Cerca o inizia una nuova chat">
                     </div>
                     <!-- Lista contatti -->
                     <div class="container-fluid">
                         <div class="row h-100 overflow-y-auto">
-                            <div @click="checkIndex(contact.id)" v-for="(contact, index) in contacts" :key="contact.id" :class="{'active' : activeIndex === index}" class="col-12">
+                            <div @click="checkIndex(contact.id)" v-for="(contact, index) in contacts" :key="contact.id" :class="{'active' : activeIndex === index, 'd-none': !contact.visible}" class="col-12">
                                 <div class="card border-0 bg-transparent">
                                     <div class="row py-2 g-0">
                                         <div class="col-10">

@@ -187,13 +187,13 @@ createApp(
                     date: '',
                     message: 'ok',
                     status: 'received'
-                }
+                },
+                searchTxt: ''
             }
         },
         methods : {
             checkIndex(id){
                     this.activeIndex = this.contacts.findIndex((contact) => contact.id ===id);
-                    console.log(this.activeIndex);
             },
             autoRx(){
                 this.autoMsg.date = dt.now().setLocale('it').toFormat('dd/LL/yyyy TT');
@@ -206,15 +206,33 @@ createApp(
                     status: 'sent'
                 }
                 this.contacts[this.activeIndex].messages.push(this.newMsg);
-                console.log(this.newMsg);
-                console.dir(this.contacts[this.activeIndex].messages);
                 setTimeout(this.autoRx, 1000);
                 this.newTxt = '';
                 this.autoMsg.date = '';
-            }
-        },
-        mounted(){
+            },
+            searchContact(){
+                /**
+                 * Salvo l'input in searchTxt - 
+                 * prendo l'array (i nomi) e per ognuno faccio il match: se l'input è contenuto è visibile
+                 * se l'input non è contenuto visibile false
+                 */
+                console.log(this.searchTxt);
+                for (contact of this.contacts){
+                    if (contact.name.toLowerCase().match(this.searchTxt)){
+                    //if (contact.name.match(this.searchTxt + "gi")){ ???
+                        console.log('ciao');
+                        console.log(contact.name);
+                        contact.visible= true;
+                    } else {
+                        contact.visible= false;
+                    }
+                };
 
+                
+            }
         }
+        // mounted(){
+
+        // }
     }
 ).mount('#app');
