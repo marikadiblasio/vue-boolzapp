@@ -23,6 +23,10 @@
 .user-header, .active-header, .main-footer{
     background-color: var(--my-secundary);
 }
+.user-header .img-card, .active-header .img-card{
+    width: 3.2rem !important;
+    height: 3.2rem;
+}
 /* Left Side */
 .w-35{
     width: 35%;

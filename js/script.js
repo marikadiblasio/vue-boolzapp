@@ -221,6 +221,10 @@ createApp(
             autoRx(){
                 this.autoMsg.date = dt.now().setLocale('it').toFormat('dd/LL/yyyy TT');
                 this.contacts[this.activeIndex].messages.push(this.autoMsg);
+                 //scroll con nuovi messaggi
+                this.$nextTick(() => {
+                    this.$refs.items[this.$refs.items.length - 1].scrollIntoView(false);
+                });
             },
             sendMsg(){
                 if (this.newTxt.trim() ===''){
@@ -234,21 +238,11 @@ createApp(
                 }
                 console.log(this.newMsg.date);
                 this.contacts[this.activeIndex].messages.push(this.newMsg);
-                
                 setTimeout(this.autoRx, 1000);
-                //scroll con nuovi messaggi DA RIVEDERE
-                // this.$nextTick(() => {
-                //     this.$refs.items[this.$refs.items.length - 1].scrollIntoView()
-                // });
                  this.newTxt = '';
                  this.autoMsg.date = '';
             },
             searchContact(){
-                /**
-                 * Salvo l'input in searchTxt - 
-                 * prendo l'array (i nomi) e per ognuno faccio il match: se l'input è contenuto è visibile
-                 * se l'input non è contenuto visibile false
-                 */
                 for (contact of this.contacts){
                     if (contact.name.toLowerCase().includes(this.searchTxt.toLowerCase())){
                         contact.visible= true;
@@ -290,9 +284,9 @@ createApp(
            deleteMsg(i){
                 this.contacts[this.activeIndex].messages.splice(i, 1);
            }
+        },
+        mounted(){
+            // console.log(this.$refs.items);
         }
-        // mounted(){
-
-        // }
     }
 ).mount('#app');
