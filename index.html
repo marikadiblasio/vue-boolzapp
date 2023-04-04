@@ -18,7 +18,7 @@
         <div class="wrapper">
             <div class="screen mx-auto my-auto">
                 <!-- Left side -->
-                <div class="w-35 h-100">
+                <div v-if="!mobile || (mobile &&!showMain && 'my-100')" class="w-35 my-d-block my-100 h-100">
                     <!-- UserHeader -->
                     <div class="user-header container-fluid">
                         <div class="row py-2 g-0 align-items-center">
@@ -63,7 +63,7 @@
                     <!-- Lista contatti -->
                     <div class="container-fluid">
                         <div class="row h-100 align-content-start overflow-x-hidden overflow-y-auto">
-                            <div @click="checkIndex(contact.id)" v-for="(contact, index) in contacts" :key="contact.id" :class="{'active' : activeIndex === index, 'd-none': !contact.visible}" class="col-12 py-2">
+                            <div @click="mobile ? showMain = !showMain : '', checkIndex(contact.id)" v-for="(contact, index) in contacts" :key="contact.id" :class="{'active' : activeIndex === index, 'd-none': !contact.visible}" class="col-12 py-2">
                                 <div class="card border-0 bg-transparent">
                                     <div class="row py-2 m-0 g-0">
                                         <div class="col-10">
@@ -85,7 +85,8 @@
                     </div>
                 </div>
                 <!-- Main side -->
-                <div class="w-65 h-100">
+                <!-- v-if="showMain" -->
+                <div v-if="!mobile || (mobile && showMain && 'my-100')" class="w-65 my-100 h-100">
                     <!-- Active contact -->
                     <div class="active-header">
                         <div class="container-fluid align-items-center row py-2 g-0">
@@ -111,10 +112,11 @@
                     <div class="active-main">
                         <div class="container-fluid h-100">
                             <div class="row flex-column justify-content-center position-relative align-items-center gy-2  mt-2 gx-5">
+                                <button v-if="mobile && showMain" @click="showMain=false" class="btn btn-secondary rounded">&lArr;</button>
                                 <div v-for="(waMsg, index) in contacts[activeIndex].messages" ref="items" :key="index" :class="waMsg.status, {'d-none' : waMsg.removed === true}" class="rounded mx-5 fit-ctn position-relative">
                                     <div class="card-body pt-4">
                                         {{waMsg.message}}
-                                        <button @click="waMsg.drop = !waMsg.drop" class="btn"><i class="fa-solid fa-angle-down"></i></button>
+                                        <button @click="waMsg.drop = !waMsg.drop" class="btn my-opacity-0"><i class="fa-solid fa-angle-down"></i></button>
                                     </div>
                                     <!-- <div class="card-text small text-end text-body-secondary">{{waMsg.date}}</div> -->
                                     <div class="card-text small text-end text-body-secondary">{{getMessageHour(index)}}</div>

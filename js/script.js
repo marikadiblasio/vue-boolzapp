@@ -212,6 +212,8 @@ createApp(
                     drop: false
                 },
                 searchTxt: '',
+                mobile: window.matchMedia("(max-width: 576px)").matches,
+                showMain: false
             }
         },
         methods : {
@@ -283,10 +285,16 @@ createApp(
             },
            deleteMsg(i){
                 this.contacts[this.activeIndex].messages.splice(i, 1);
+           },
+           checkview(){
+                    this.mobile= window.matchMedia("(max-width: 576px)").matches;
+                    if (this.mobile){
+                        this.showMain =false;
+                    }
            }
         },
-        mounted(){
-            // console.log(this.$refs.items);
+        created(){
+            window.addEventListener('resize', this.checkview);
         }
     }
 ).mount('#app');
