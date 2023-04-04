@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.47/vue.global.min.js" integrity="sha512-DJ2+sosWB5FnZAIeCWAHu2gxQ7Gi438oOZLcBQSOrW8gD0s7LIXDv/5RW76B3FcljF40BXnfqNIo6Dhp7dFHJg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Boolzapp</title>
 </head>
 <body>
@@ -72,11 +73,11 @@
                                                 </div>
                                                 <div class="ps-2 flex-grow-1">
                                                     <h5 class="m-0 lh-1">{{contact.name}}</h5>
-                                                    <p class="text-secondary m-0">{{contact.messages[contact.messages.length-1].message}}</p>
+                                                    <p class="text-secondary m-0">{{getLastMessageText(index)}}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-2 text-end">{{contact.messages[contact.messages.length-1].date.slice(11, 16)}}</div>
+                                        <div class="col-2 text-end">{{getLastMessageHour(index)}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +96,7 @@
                                     </div>
                                     <div class="ps-2 flex-grow-1">
                                         <h5 class="m-0 lh-1">{{contacts[activeIndex].name}}</h5>
-                                        <span class="text-secondary small">Ultimo accesso effettuato il {{contacts[activeIndex].messages[contacts[activeIndex].messages.length-1].date.slice(0, 10)}} alle ore {{contacts[activeIndex].messages[contacts[activeIndex].messages.length-1].date.slice(11, 16)}}</span>
+                                        <span class="text-secondary small">Ultimo accesso effettuato il {{getLastMessageDate(activeIndex)}} alle ore {{getLastMessageHour(activeIndex)}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +117,7 @@
                                         <button @click="waMsg.drop = !waMsg.drop" class="btn"><i class="fa-solid fa-angle-down"></i></button>
                                     </div>
                                     <!-- <div class="card-text small text-end text-body-secondary">{{waMsg.date}}</div> -->
-                                    <div class="card-text small text-end text-body-secondary">{{waMsg.date.slice(11, 16)}}</div>
+                                    <div class="card-text small text-end text-body-secondary">{{getMessageHour(index)}}</div>
                                     <div :class="{'d-none' : waMsg.drop === false}" class="dropOpts bg-white rounded position-absolute">
                                         <ul class="list-unstyled">
                                             <li class="btn">Info messaggio</li>

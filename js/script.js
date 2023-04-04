@@ -232,14 +232,16 @@ createApp(
                     status: 'sent',
                     drop: false
                 }
+                console.log(this.newMsg.date);
                 this.contacts[this.activeIndex].messages.push(this.newMsg);
+                
                 setTimeout(this.autoRx, 1000);
                 //scroll con nuovi messaggi DA RIVEDERE
-                this.$nextTick(() => {
-                    this.$refs.items[this.$refs.items.length - 1].scrollIntoView()
-                });
-                this.newTxt = '';
-                this.autoMsg.date = '';
+                // this.$nextTick(() => {
+                //     this.$refs.items[this.$refs.items.length - 1].scrollIntoView()
+                // });
+                 this.newTxt = '';
+                 this.autoMsg.date = '';
             },
             searchContact(){
                 /**
@@ -254,11 +256,39 @@ createApp(
                         contact.visible= false;
                     }
                 };
+                
+            },
+            //PER date e orari
+            getLastMessageHour(i){
+                if (this.contacts[i].messages.length>0){
+                    return this.contacts[i].messages[this.contacts[i].messages.length-1].date.slice(11, 16);
+                    } else {
+                        return ''
+                    }
+            },
+            getMessageHour(i){
+                if (this.contacts[this.activeIndex].messages.length>0){
+                    return this.contacts[this.activeIndex].messages[i].date.slice(11, 16);
+                    } else {
+                        return ''
+                    }
+            },
+            getLastMessageText(i){
+                if (this.contacts[i].messages.length>0){
+                    return this.contacts[i].messages[this.contacts[i].messages.length-1].message;
+                } else {
+                    return ''
+                }
+            },
+            getLastMessageDate(i){
+                if (this.contacts[i].messages.length>0){
+                return this.contacts[i].messages[this.contacts[i].messages.length-1].date.slice(0, 10);
+                } else {
+                    return ''
+                }
             },
            deleteMsg(i){
-                console.log(this.contacts[this.activeIndex].messages[i]);
-                console.log(this.contacts[this.activeIndex].messages);
-                this.contacts[this.activeIndex].messages.splice(this.contacts[this.activeIndex].messages[2, 1]);
+                this.contacts[this.activeIndex].messages.splice(i, 1);
            }
         }
         // mounted(){
