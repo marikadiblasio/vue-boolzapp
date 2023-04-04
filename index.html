@@ -110,8 +110,8 @@
                     <div class="active-main">
                         <div class="container-fluid h-100">
                             <div class="row flex-column justify-content-center position-relative align-items-center gy-2  mt-2 gx-5">
-                                <div v-for="(waMsg, index) in contacts[activeIndex].messages" :key="index" :class="waMsg.status, {'d-none' : waMsg.removed === true}" class="rounded mx-5 fit-ctn position-relative">
-                                    <div :class="{'d-none' : waMsg.removed === true}" class="card-body pt-4">
+                                <div v-for="(waMsg, index) in contacts[activeIndex].messages" :key="index" :class="waMsg.status, {'d-none' : waMsg.removed === true}" class="rounded mx-5 fit-ctn position-relative" ref="items">
+                                    <div class="card-body pt-4">
                                         {{waMsg.message}}
                                         <button @click="waMsg.drop = !waMsg.drop" class="btn"><i class="fa-solid fa-angle-down"></i></button>
                                     </div>
@@ -119,7 +119,7 @@
                                     <div class="card-text small text-end text-body-secondary">{{waMsg.date.slice(11, 16)}}</div>
                                     <div :class="{'d-none' : waMsg.drop === false}" class="dropOpts bg-white rounded position-absolute">
                                         <ul class="list-unstyled">
-                                            <li class="btn" click="openInfo()">Info messaggio</li>
+                                            <li class="btn">Info messaggio</li>
                                             <li class="btn" @click="deleteMsg(index)">Cancella messaggio</li>
                                         </ul>
                                     </div>
