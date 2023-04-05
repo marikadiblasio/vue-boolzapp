@@ -198,7 +198,7 @@ createApp(
                             ],
                         }
                 ],
-                activeIndex: 0,
+                activeIndex: null,
                 newTxt: '',
                 newMsg: {
                     date: '',
@@ -217,7 +217,10 @@ createApp(
                 showMain: false,
                 dark: false,
                 showPicker: false,
-                showEllipsis: false
+                showEllipsis: false,
+                isLoading: true,
+                isWriting: false,
+                isOnline: false
             }
         },
         methods : {
@@ -225,6 +228,7 @@ createApp(
                     this.activeIndex = this.contacts.findIndex((contact) => contact.id === id);
             },
             autoRx(){
+                this.isWriting = true;
                 this.autoMsg.date = dt.now().setLocale('it').toFormat('dd/LL/yyyy TT');
                 this.contacts[this.activeIndex].messages.push(this.autoMsg);
                  //scroll con nuovi messaggi
@@ -245,6 +249,14 @@ createApp(
                 console.log(this.newMsg.date);
                 this.contacts[this.activeIndex].messages.push(this.newMsg);
                 setTimeout(this.autoRx, 1000);
+                setTimeout(() => {
+                    this.isWriting = false;
+                    this.isOnline = true;
+                }, 2000);
+                setTimeout(() => {
+                    this.isWriting = false;
+                    this.isOnline = false;
+                }, 3000);
                  this.newTxt = '';
                  this.showPicker= false;
                  this.autoMsg.date = '';
@@ -313,6 +325,9 @@ createApp(
            }
         },
         created(){
+            setTimeout(() => {
+                this.isLoading = false
+               }, 1000)
             window.addEventListener('resize', this.checkview);
         }
     }
