@@ -1,3 +1,4 @@
+import Picker from './emoji-picker.js';
 const dt = luxon.DateTime;
 const { createApp } = Vue;
 
@@ -213,7 +214,9 @@ createApp(
                 },
                 searchTxt: '',
                 mobile: window.matchMedia("(max-width: 576px)").matches,
-                showMain: false
+                showMain: false,
+                dark: false,
+                showPicker: false
             }
         },
         methods : {
@@ -242,6 +245,7 @@ createApp(
                 this.contacts[this.activeIndex].messages.push(this.newMsg);
                 setTimeout(this.autoRx, 1000);
                  this.newTxt = '';
+                 this.showPicker= false;
                  this.autoMsg.date = '';
             },
             searchContact(){
@@ -291,10 +295,13 @@ createApp(
                     if (this.mobile){
                         this.showMain =false;
                     }
+           },
+           onSelectEmoji(emoji){
+                this.newTxt += emoji.i;
            }
         },
         created(){
             window.addEventListener('resize', this.checkview);
         }
     }
-).mount('#app');
+).component('Picker', Picker).mount('#app');

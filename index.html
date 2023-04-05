@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
     <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
     <script src="./js/emoji-picker.js" type="module"></script>
+    <link rel="stylesheet" href="./js/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.47/vue.global.min.js" integrity="sha512-DJ2+sosWB5FnZAIeCWAHu2gxQ7Gi438oOZLcBQSOrW8gD0s7LIXDv/5RW76B3FcljF40BXnfqNIo6Dhp7dFHJg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Boolzapp</title>
 </head>
@@ -136,7 +137,11 @@
                     <div class="main-footer d-flex align-items-center">
                         <div class="container-fluid">
                             <div class="row justify-content-between fs-3 align-items-center w-100">
-                                <div class="col-1 text-secondary text-center"><i class="fa-regular fa-face-smile"></i></div>
+                               <!-- Picker Emoji -->
+                                <div class="position-relative">
+                                    <Picker @select="onSelectEmoji()" :class="{'d-none': !showPicker}" class="my-picker"/>
+                                </div>
+                                <div @click="showPicker = !showPicker" class="col-1 text-secondary text-center"><i class="fa-regular fa-face-smile"></i></div>
                                 <div class="col-10">
                                     <input @keyup.enter="sendMsg" v-model="newTxt" type="text" name="user-msg" class="form-control fs-4" placeholder="Scrivi un messaggio">
                                 </div>

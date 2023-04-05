@@ -94,6 +94,13 @@
 .my-opacity-0{
     opacity: 0;
 }
+/* Writing bar */
+/* Emoji */
+.my-picker{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
 /* Hover & Active */
 .w-35 .col-12:hover{
     background-color: var(--my-secundary);
