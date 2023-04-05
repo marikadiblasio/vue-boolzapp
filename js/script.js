@@ -216,7 +216,8 @@ createApp(
                 mobile: window.matchMedia("(max-width: 576px)").matches,
                 showMain: false,
                 dark: false,
-                showPicker: false
+                showPicker: false,
+                showEllipsis: false
             }
         },
         methods : {
@@ -249,14 +250,16 @@ createApp(
                  this.autoMsg.date = '';
             },
             searchContact(){
-                for (contact of this.contacts){
+                console.log('ciao')
+                this.contacts.forEach((contact) => {
+                    console.log(contact);
+
                     if (contact.name.toLowerCase().includes(this.searchTxt.toLowerCase())){
                         contact.visible= true;
                     } else {
                         contact.visible= false;
                     }
-                };
-                
+                })
             },
             //PER date e orari
             getLastMessageHour(i){
@@ -287,8 +290,17 @@ createApp(
                     return ''
                 }
             },
+            //Per cancellare
            deleteMsg(i){
                 this.contacts[this.activeIndex].messages.splice(i, 1);
+           },
+           deleteAllMsg(){
+                this.contacts[this.activeIndex].messages = {};
+                this.showEllipsis = false;
+           },
+           deleteChat(){
+            this.contacts.splice(this.activeIndex, 1);
+                this.showEllipsis = false;
            },
            checkview(){
                     this.mobile= window.matchMedia("(max-width: 576px)").matches;

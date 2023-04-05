@@ -107,7 +107,13 @@
                             <div class="col-3 fs-3 text-end">
                                 <a class="text-secondary px-2" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
                                 <a class="text-secondary px-2" href="#"><i class="fa-solid fa-paperclip"></i></a>
-                                <a class="text-secondary ps-2 pe-3" href="#"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                <a @click="showEllipsis = ! showEllipsis" class="text-secondary ps-2 pe-3" href="#"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                <div class="bg-white rounded position-relative">
+                                    <ul v-if="showEllipsis" class="bg-white dropOpts list-unstyled">
+                                        <li class="btn" @click="deleteAllMsg(index)">Elimina messaggi</li>
+                                        <li class="btn" @click="deleteChat(index)">Elimina chat</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -139,8 +145,8 @@
                             <div class="row justify-content-between fs-3 align-items-center w-100">
                                <!-- Picker Emoji -->
                                 <div class="position-relative">
-                                    <Picker @select="onSelectEmoji()" :class="{'d-none': !showPicker}" class="my-picker"/>
-                                </div>
+                                    <Picker @select="onSelectEmoji" :class="{'d-none': !showPicker}" class="my-picker"/>
+                                </div> 
                                 <div @click="showPicker = !showPicker" class="col-1 text-secondary text-center"><i class="fa-regular fa-face-smile"></i></div>
                                 <div class="col-10">
                                     <input @keyup.enter="sendMsg" v-model="newTxt" type="text" name="user-msg" class="form-control fs-4" placeholder="Scrivi un messaggio">
